@@ -1,0 +1,7 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+	1) notify-send -t 10000 -i /usr/share/icons/Paper/48x48/apps/calendar-blue-$(date | cut -f 3 -d ' ').png "$(cal)" ;; # left click
+esac
+
+date '+%Y-%m-%d %H:%M:%S'

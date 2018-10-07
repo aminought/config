@@ -1,0 +1,314 @@
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+#
+# This config file uses keycodes (bindsym) and was written for the QWERTY
+# layout.
+#
+# To get a config file with the same key positions, but for your current
+# layout, use the i3-config-wizard
+#
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:Source Code Pro Bold 6.5
+set $background /home/aminought/Pictures/Anime/brown_hair\ huke\ long_hair\ makise_kurisu\ steins\;gate\ tie\ white.jpg
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+# font pango:DejaVu Sans Mono 8
+
+# Before i3 v4.8, we used to recommend this one as the default:
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, its unicode glyph coverage is limited, the old
+# X core fonts rendering does not support right-to-left and this being a bitmap
+# font, it doesn’t scale on retina/hidpi displays.
+
+# use these keys for focus, movement, and resize directions when reaching for
+# the arrows is not convenient
+set $up k
+set $down j
+set $left h
+set $right l
+
+set $mod Mod4
+
+# use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# start apps
+bindsym $mod+q exec --no-startup-id /bin/firefox
+bindsym $mod+y exec --no-startup-id /bin/nautilus
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec "rofi -combi-modi window,drun -show combi -modi combi -font 'Source Code Pro Bold 10'"
+
+# change focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+u [urgent=latest] focus
+
+# move focused window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+g split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym$mod+Shift+a focus child
+
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+set $w1 "1: www"
+set $w2 "2: term"
+set $w3 "3: IM"
+set $w4 "4: edu"
+set $w5 "5: work"
+set $w6 "6: status"
+set $w7 "7: music"
+set $w8 "8: other"
+set $w9 "9"
+set $w10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace $w1
+bindsym $mod+2 workspace $w2
+bindsym $mod+3 workspace $w3
+bindsym $mod+4 workspace $w4
+bindsym $mod+5 workspace $w5
+bindsym $mod+6 workspace $w6
+bindsym $mod+7 workspace $w7
+bindsym $mod+8 workspace $w8
+bindsym $mod+9 workspace $w9
+bindsym $mod+0 exec i3-input -F 'workspace "%s"' -P 'Switch to workspace: '
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $w1
+bindsym $mod+Shift+2 move container to workspace $w2
+bindsym $mod+Shift+3 move container to workspace $w3
+bindsym $mod+Shift+4 move container to workspace $w4
+bindsym $mod+Shift+5 move container to workspace $w5
+bindsym $mod+Shift+6 move container to workspace $w6
+bindsym $mod+Shift+7 move container to workspace $w7
+bindsym $mod+Shift+8 move container to workspace $w8
+bindsym $mod+Shift+9 move container to workspace $w9
+bindsym $mod+Shift+0 move container to workspace $w10
+
+# move workspace to other screen
+bindsym $mod+m move workspace to output left
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym $left       resize shrink width 1 px or 1 ppt
+        bindsym $down       resize grow height 1 px or 1 ppt
+        bindsym $up         resize shrink height 1 px or 1 ppt
+        bindsym $right      resize grow width 1 px or 1 ppt
+
+        bindsym y      resize shrink width 5 px or 5 ppt
+        bindsym u      resize grow height 5 px or 5 ppt
+        bindsym i      resize shrink height 5 px or 5 ppt
+        bindsym o      resize grow width 5 px or 5 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left        resize shrink width 1 px or 1 ppt
+        bindsym Down        resize grow height 1 px or 1 ppt
+        bindsym Up          resize shrink height 1 px or 1 ppt
+        bindsym Right       resize grow width 1 px or 1 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+set $Locker i3lock-wrapper -l
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Pause mode "$mode_system"
+
+
+set $mode_display Display: [w]ork, [h]ome, h[d]mi, [l]vds
+bindsym $mod+o mode "$mode_display"
+
+
+mode "$mode_display" {
+	bindsym w exec --no-startup-id "xrandr --output LVDS1 --auto --primary --output VGA1 --auto --right-of LVDS1; feh --bg-scale $background", mode "default"
+	bindsym h exec --no-startup-id "xrandr --output LVDS1 --auto --output HDMI1 --mode 2048x1152 --primary --left-of LVDS1; feh --bg-scale $background", mode "default"
+	bindsym d exec --no-startup-id "xrandr --output HDMI1 --mode 2048x1152 --primary --output LVDS1 --off --auto; feh --bg-scale $background", mode "default"
+	bindsym l exec --no-startup-id "xrandr --output LVDS1 --mode 1366x768 --primary --output HDMI1 --off --auto; feh --bg-scale $background", mode "default'
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+# Defining colors
+set $cyan	#00afd7
+set $acqua	#00d787 
+set $wine 	#72003e
+set $magenta 	#af005f
+set $orange 	#ff8700
+set $silver 	#e4e4e4
+set $elegant	#1b1d1e
+set $elegant_l	#424242
+
+set $blue	#1874cd
+set $white	#ffffff
+set $black	#000000
+set $grey	#707070
+set $light_grey	#b8b8b8
+
+# Set some nice colors		border		background	text			indicator
+client.focused				$blue		$blue		$white   		$white
+client.unfocused 			$elegant 	$elegant	$light_grey		$white
+client.focused_inactive     $magenta 	$magenta    $silver			$magenta
+client.urgent				$wine		$wine		$white			$wine
+client.placeholder 			$magenta	$magenta 	$silver			$white
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+	status_command i3blocks
+	position top
+	strip_workspace_numbers no
+	tray_output primary
+	colors
+	{
+				  		    # Border	# Background	# Text
+		focused_workspace   $white		$white			$black
+		active_workspace    $elegant    $elegant        $orange
+		inactive_workspace  $elegant    $elegant       	$light_grey
+		urgent_workspace    $wine    	$wine       	$silver
+		background          $elegant
+	}
+}
+
+new_window pixel 1
+
+exec feh --bg-scale $background
+exec notify-send "Welcome back."
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +2% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -2% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 1 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 1 # decrease screen brightness
+
+# Media player controls
+bindsym XF86AudioPause exec --no-startup-id mpc toggle
+bindsym XF86AudioStop exec --no-startup-id mpc stop
+bindsym XF86AudioNext exec --no-startup-id mpc next
+bindsym XF86AudioPrev exec --no-startup-id mpc prev
+
+# i3-lock
+bindsym Mod1+Ctrl+l exec $Locker
+
+# Rofi
+bindsym $mod+c exec rofi -show run
+
+# Manipulations with window size and position
+bindsym $mod+x resize set 1280 720
+bindsym $mod+Shift+x move absolute position 925 515
+
+# Mark and Goto to contation
+bindsym $mod+Shift+Tab exec i3-input -F 'mark "%s"' -l 1 -P 'Mark: '
+bindsym $mod+Tab exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Go to: '
+
+# Custom window rules
+for_window [class="Keepassx2"] floating enable
+for_window [title="Terminator Preferences"] floating enable
+for_window [class="Octave"] floating enable
+for_window [class="feh"] floating enable
+for_window [class="mpv"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class=".*"] title_format "%title"
+
+# Assigning to workspaces
+assign [class="Telegram"] $w3
+assign [class="VK"] $w3
+assign [class="Slack"] $w3
+
+focus_on_window_activation focus
+hide_edge_borders both
+workspace_auto_back_and_forth yes
